@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2">
+                Nombres
+                <h:inputText value="#{demoJSFManagedBean.nombres}"/>
+                Apellidos
+                <h:inputText value="#{demoJSFManagedBean.apellidos}"/>
+                Tipo Documento
+                <h:selectOneMenu value="#{demoJSFManagedBean.tipoDocSelected}">
+                    <f:selectItems value="#{demoJSFManagedBean.itemTipoDoc}" />
+		</h:selectOneMenu>
+                Numero de Documento
+                <h:inputText value="#{demoJSFManagedBean.numeroDocumento}"/>
+                Fecha Nacimiento
+            <p:calendar id="inline" value="#{demoJSFManagedBean.date}" mode="popup" />      
+            <h:commandButton value="Guardar" action="#{demoJSFManagedBean.doNuevaPersona()}" />
+                
+            </h:panelGrid>
+
+            <h1><h:outputText value="Listado"/></h1>
+            
+            <p:dataTable id="dataT" value="#{demoJSFManagedBean.listaPersonas}" var="p"
+                         style="width: 500px" rendered="true">
+                <p:column>
+                    <f:facet name="header">Nombres</f:facet>
+                    #{p.nombres}
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Apellidos</f:facet>
+                    #{p.apellidos}
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Tipo de Documento</f:facet>
+                    #{p.tipoDocumento.nombre}
+                </p:column>
+            <p:column>
+                    <f:facet name="header">Numero de Documento</f:facet>
+                    #{p.numeroDocumento}
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Fecha de Nacimiento</f:facet>
+                    #{p.fechaDeNacimiento}
+                </p:column>
+                <p:column>
+                    <h:commandLink action="#{demoJSFManagedBean.doEditarPersona(p)}" value="Editar"></h:commandLink>
+                </p:column>
+                <p:column>
+                    <h:commandLink action="#{demoJSFManagedBean.doEliminarPersona(p)}" value="Eliminar"></h:commandLink>
+                </p:column>
+            </p:dataTable>
+
+        </h:form>      
+    </h:body>
+</html>
+
